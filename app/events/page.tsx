@@ -35,7 +35,7 @@ export default function Events() {
             key={event.id}
             className="flex flex-col md:flex-row bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition"
           >
-            <div className="bg-indigo-600 text-white p-6 flex flex-col items-center justify-center min-w-[150px] text-center">
+            <div className="bg-indigo-600 text-white p-6 flex flex-col items-center justify-center min-w-37.5 text-center">
               <span className="text-3xl font-bold block">
                 {event.date.split(" ")[1]}
               </span>
@@ -43,7 +43,7 @@ export default function Events() {
                 {event.date.split(" ")[0]}
               </span>
             </div>
-            <div className="p-6 flex-grow flex flex-col justify-center">
+            <div className="p-6 grow flex flex-col justify-center">
               <div className="flex items-center text-sm text-slate-500 mb-2">
                 <span>⏰ {event.time}</span>
               </div>
