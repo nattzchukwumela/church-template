@@ -29,7 +29,7 @@ export default function Give() {
     { value: "mission", label: "Missions", desc: "Reach the nations" },
   ];
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -38,7 +38,7 @@ export default function Give() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white">
+      <div className="bg-linear-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white">
         <div className="max-w-6xl mx-auto px-4 py-20 text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6">
             <Sparkles className="w-4 h-4" />
@@ -50,9 +50,9 @@ export default function Give() {
           </h1>
 
           <p className="text-xl text-emerald-50 max-w-2xl mx-auto leading-relaxed mb-3">
-            "Each of you should give what you have decided in your heart to
-            give, not reluctantly or under compulsion, for God loves a cheerful
-            giver."
+            &ldquo;Each of you should give what you have decided in your heart
+            to give, not reluctantly or under compulsion, for God loves a
+            cheerful giver.&ldquo;
           </p>
           <p className="text-emerald-100 font-medium">— 2 Corinthians 9:7</p>
         </div>
@@ -63,7 +63,7 @@ export default function Give() {
           {/* Main Giving Form */}
           <div className="lg:col-span-3 bg-white rounded-2xl shadow-2xl p-8">
             <div className="flex items-center gap-3 pb-6 border-b border-slate-200 mb-8">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
                 <Heart className="w-5 h-5 text-white" fill="white" />
               </div>
               <div>
@@ -125,7 +125,7 @@ export default function Give() {
                     onClick={() => setAmount(item.value.toString())}
                     className={`flex-1 py-3 rounded-lg font-bold transition-all ${
                       amount === item.value.toString()
-                        ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg"
+                        ? "bg-linear-to-r from-emerald-500 to-teal-600 text-white shadow-lg"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
@@ -153,7 +153,7 @@ export default function Give() {
             <button
               onClick={() => alert("Paystack integration goes here")}
               disabled={!amount}
-              className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-5 rounded-xl hover:shadow-2xl hover:scale-[1.02] active:scale-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="w-full bg-linear-to-r from-emerald-500 to-teal-600 text-white font-bold py-5 rounded-xl hover:shadow-2xl hover:scale-[1.02] active:scale-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               <span className="text-lg">Continue to Payment</span>
             </button>
@@ -167,7 +167,7 @@ export default function Give() {
           {/* Sidebar */}
           <div className="lg:col-span-2 space-y-6">
             {/* Bank Transfer */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl shadow-xl p-6 relative overflow-hidden">
+            <div className="bg-linear-to-br from-slate-800 to-slate-900 text-white rounded-2xl shadow-xl p-6 relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-500 rounded-full opacity-10 blur-2xl"></div>
 
               <div className="relative">
