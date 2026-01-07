@@ -2,241 +2,322 @@
 
 import { useState } from "react";
 import {
-  Heart,
-  CreditCard,
-  Building2,
-  ArrowRight,
-  Check,
-  Copy,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  MessageSquare,
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+  CheckCircle2,
 } from "lucide-react";
 
-export default function Give() {
-  const [amount, setAmount] = useState("");
-  const [fund, setFund] = useState("tithes");
-  const [copied, setCopied] = useState(false);
-  const [selectedAmount, setSelectedAmount] = useState<null | number>(null);
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-  const quickAmounts = [5000, 10000, 25000, 50000];
-
-  const handleQuickAmount = (value: number) => {
-    setAmount(value.toString());
-    setSelectedAmount(value);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: ["123 Church Street", "Port Harcourt, Rivers State", "Nigeria"],
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: ["+234 123 456 7890", "+234 098 765 4321"],
+      color: "from-emerald-500 to-teal-600",
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: ["info@havencity.church", "hello@havencity.church"],
+      color: "from-purple-500 to-pink-600",
+    },
+    {
+      icon: Clock,
+      title: "Service Times",
+      details: [
+        "Sunday: 8:00 AM & 10:00 AM",
+        "Wednesday: 6:00 PM",
+        "Friday: 7:00 PM",
+      ],
+      color: "from-orange-500 to-red-600",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      icon: Facebook,
+      label: "Facebook",
+      href: "#",
+      color: "hover:bg-blue-600",
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      href: "#",
+      color: "hover:bg-pink-600",
+    },
+    { icon: Twitter, label: "Twitter", href: "#", color: "hover:bg-sky-500" },
+    { icon: Youtube, label: "YouTube", href: "#", color: "hover:bg-red-600" },
+  ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-indigo-50 via-white to-purple-50">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-lg">
-            <Heart className="w-8 h-8 text-white" fill="white" />
+    <div className="min-h-screen bg-slate-50">
+      {/* Hero Section */}
+      <div className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6">
+            <MessageSquare className="w-4 h-4" />
+            <span className="text-sm font-medium">Get in Touch</span>
           </div>
-          <h1 className="text-5xl font-bold text-transparent mb-6 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            Give with Joy
-          </h1>
-          <p className="text-xl text-slate-600 leading-relaxed">
-            &ldquo;Each of you should give what you have decided in your heart
-            to give, not reluctantly or under compulsion, for God loves a
-            cheerful giver.&ldquo;
-          </p>
-          <p className="text-sm text-indigo-600 font-medium mt-2">
-            — 2 Corinthians 9:7
+
+          <h1 className="text-6xl font-bold mb-6 drop-shadow-lg">Contact Us</h1>
+
+          <p className="text-xl text-indigo-100 max-w-2xl mx-auto leading-relaxed">
+            We&apos;d love to hear from you. Reach out with any questions,
+            prayer requests, or just to say hello!
           </p>
         </div>
+      </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Online Giving Card - Takes 2 columns */}
-          <div className="lg:col-span-2 bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-linear-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900">
-                  Give Online
-                </h2>
-                <p className="text-sm text-slate-500">
-                  Fast, secure, and convenient
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              {/* Quick Amount Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">
-                  Quick Select Amount
-                </label>
-                <div className="grid grid-cols-4 gap-3">
-                  {quickAmounts.map((value) => (
-                    <button
-                      key={value}
-                      onClick={() => handleQuickAmount(value)}
-                      className={`py-3 px-4 rounded-xl font-semibold transition-all ${
-                        selectedAmount === value
-                          ? "bg-linear-to-r from-indigo-500 to-purple-600 text-white shadow-lg scale-105"
-                          : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
-                      }`}
-                    >
-                      ₦{(value / 1000).toFixed(0)}k
-                    </button>
-                  ))}
+      <div className="max-w-7xl mx-auto px-4 -mt-10 pb-16">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Contact Form */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-2xl p-8">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 bg-linear-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                  <Send className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900">
+                    Send us a Message
+                  </h2>
+                  <p className="text-sm text-slate-500">
+                    We typically respond within 24 hours
+                  </p>
                 </div>
               </div>
-
-              {/* Custom Amount */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">
-                  Or Enter Custom Amount
-                </label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-semibold text-lg">
-                    ₦
-                  </span>
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => {
-                      setAmount(e.target.value);
-                      setSelectedAmount(null);
-                    }}
-                    placeholder="Enter amount"
-                    className="w-full bg-slate-50 border-2 border-slate-200 rounded-xl pl-10 pr-4 py-4 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                  />
-                </div>
-              </div>
-
-              {/* Fund Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">
-                  Select Fund
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: "tithes", label: "Tithes", icon: "🙏" },
-                    { value: "offering", label: "Offering", icon: "💝" },
-                    { value: "building", label: "Building", icon: "🏛️" },
-                  ].map((option) => (
-                    <button
-                      key={option.value}
-                      onClick={() => setFund(option.value)}
-                      className={`py-4 px-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2 ${
-                        fund === option.value
-                          ? "bg-linear-to-br from-indigo-500 to-purple-600 text-white shadow-lg"
-                          : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
-                      }`}
-                    >
-                      <span className="text-2xl">{option.icon}</span>
-                      <span className="text-sm">{option.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                onClick={() => alert("This would trigger the Paystack popup")}
-                className="w-full bg-linear-to-r from-indigo-500 to-purple-600 text-white font-bold py-5 rounded-xl hover:shadow-xl transition-all flex items-center justify-center gap-3 group mt-8"
-              >
-                <span className="text-lg">Complete Donation</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
-                <Check className="w-4 h-4 text-green-500" />
-                <span>Secured by Paystack • Your details are safe</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bank Transfer Card */}
-          <div className="bg-linear-to-br from-slate-800 to-slate-900 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500 rounded-full blur-3xl opacity-20"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500 rounded-full blur-3xl opacity-20"></div>
-
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6">
-                <Building2 className="w-6 h-6 text-white" />
-              </div>
-
-              <h2 className="text-2xl font-bold mb-3">Bank Transfer</h2>
-              <p className="text-slate-300 text-sm mb-8">
-                Transfer directly to our account
-              </p>
 
               <div className="space-y-6">
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
-                    Bank Name
-                  </p>
-                  <p className="text-lg font-bold">GTBank</p>
-                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="John Doe"
+                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    />
+                  </div>
 
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
-                    Account Number
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <p className="text-2xl font-mono font-bold text-indigo-300">
-                      0123456789
-                    </p>
-                    <button
-                      onClick={() => copyToClipboard("0123456789")}
-                      className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition"
-                    >
-                      {copied ? (
-                        <Check className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </button>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    />
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
-                    Account Name
-                  </p>
-                  <p className="text-lg font-bold">Haven City Church</p>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Subject *
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="How can we help you?"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                  />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={6}
+                    placeholder="Tell us more about your inquiry..."
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none"
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  className="w-full bg-linear-to-r from-indigo-500 to-purple-600 text-white font-bold py-4 rounded-xl hover:shadow-xl hover:scale-[1.02] active:scale-100 transition-all flex items-center justify-center gap-3"
+                >
+                  <Send className="w-5 h-5" />
+                  <span>Send Message</span>
+                </button>
+
+                {submitted && (
+                  <div className="flex items-center gap-3 bg-emerald-50 text-emerald-700 px-4 py-3 rounded-xl border border-emerald-200">
+                    <CheckCircle2 className="w-5 h-5" />
+                    <span className="font-medium">
+                      Message sent successfully! We&apos;ll get back to you
+                      soon.
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Info Sidebar */}
+          <div className="space-y-6">
+            {contactInfo.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-shadow"
+              >
+                <div
+                  className={`w-12 h-12 bg-linear-to-br ${item.color} rounded-xl flex items-center justify-center mb-4`}
+                >
+                  <item.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                  {item.title}
+                </h3>
+                <div className="space-y-1">
+                  {item.details.map((detail, idx) => (
+                    <p key={idx} className="text-sm text-slate-600">
+                      {detail}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Social Media */}
+            <div className="bg-linear-to-br from-slate-800 to-slate-900 text-white rounded-2xl shadow-xl p-6">
+              <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className={`flex items-center gap-2 bg-white/10 ${social.color} px-4 py-3 rounded-xl transition-all hover:scale-105`}
+                  >
+                    <social.icon className="w-5 h-5" />
+                    <span className="text-sm font-medium">{social.label}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Info Section */}
-        <div className="max-w-4xl mx-auto mt-12 bg-indigo-50 rounded-2xl p-8 border border-indigo-100">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">
-            Your giving makes a difference
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6 text-sm text-slate-600">
-            <div>
-              <span className="font-semibold text-indigo-600">
-                🎯 Mission Support
-              </span>
-              <p className="mt-1">Spreading the gospel locally and globally</p>
-            </div>
-            <div>
-              <span className="font-semibold text-indigo-600">
-                🤝 Community Care
-              </span>
-              <p className="mt-1">
-                Supporting those in need within our community
+        {/* Map Section */}
+        <div className="mt-12 bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-linear-to-r from-indigo-500 to-purple-600 px-6 py-4">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <MapPin className="w-5 h-5" />
+              Find Us on the Map
+            </h3>
+          </div>
+          <div className="aspect-video bg-slate-200 flex items-center justify-center">
+            <div className="text-center">
+              <MapPin className="w-16 h-16 text-slate-400 mx-auto mb-4" />
+              <p className="text-slate-600 font-medium">
+                Interactive map would be embedded here
+              </p>
+              <p className="text-sm text-slate-500 mt-2">
+                Google Maps or similar service
               </p>
             </div>
-            <div>
-              <span className="font-semibold text-indigo-600">
-                🏗️ Building Future
-              </span>
-              <p className="mt-1">Creating spaces for worship and fellowship</p>
-            </div>
+          </div>
+        </div>
+
+        {/* Quick Contact Cards */}
+        <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+            <div className="text-4xl mb-3">📞</div>
+            <h4 className="font-bold text-slate-900 mb-2">
+              Emergency Prayer Line
+            </h4>
+            <p className="text-sm text-slate-600 mb-3">
+              Available 24/7 for urgent prayer needs
+            </p>
+            <a
+              href="tel:+2341234567890"
+              className="text-blue-600 font-semibold text-sm hover:underline"
+            >
+              Call Now →
+            </a>
+          </div>
+
+          <div className="bg-purple-50 rounded-xl p-6 border border-purple-100">
+            <div className="text-4xl mb-3">👥</div>
+            <h4 className="font-bold text-slate-900 mb-2">
+              Join a Connect Group
+            </h4>
+            <p className="text-sm text-slate-600 mb-3">
+              Find community and grow in faith together
+            </p>
+            <a
+              href="#"
+              className="text-purple-600 font-semibold text-sm hover:underline"
+            >
+              Learn More →
+            </a>
+          </div>
+
+          <div className="bg-pink-50 rounded-xl p-6 border border-pink-100">
+            <div className="text-4xl mb-3">🙋</div>
+            <h4 className="font-bold text-slate-900 mb-2">
+              First Time Visitor?
+            </h4>
+            <p className="text-sm text-slate-600 mb-3">
+              Let us know you&apos;re coming and we&apos;ll welcome you
+            </p>
+            <a
+              href="#"
+              className="text-pink-600 font-semibold text-sm hover:underline"
+            >
+              Plan Your Visit →
+            </a>
           </div>
         </div>
       </div>
