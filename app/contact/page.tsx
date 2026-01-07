@@ -41,9 +41,9 @@ export default function Give() {
             Give with Joy
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
-            "Each of you should give what you have decided in your heart to
-            give, not reluctantly or under compulsion, for God loves a cheerful
-            giver."
+            &ldquo;Each of you should give what you have decided in your heart
+            to give, not reluctantly or under compulsion, for God loves a
+            cheerful giver.&ldquo;
           </p>
           <p className="text-sm text-indigo-600 font-medium mt-2">
             — 2 Corinthians 9:7
